@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+  <title>Password generator app | Frontend Mentor</title>
+  <link rel="stylesheet" href="./assets/styles/styles.css">
+</head>
+<body>
+  <main>
+    <article class="password-generator">
+      <h6 class="password-generator__title">
+        Password Generator
+      </h6>
+      <section class="password-generator__display">
+        <p class="password-generator__generated-password">P4$5W0rD!</p>
+        <button class="password-generator__copy-btn">
+          <img src="./assets/images/icon-copy.svg" width="17.5" height="20" alt="copy icon">
+        </button>
+      </section>
+      <section class="password-generator__generator-container">
+        <div class="password-generator__generator-group">
+          <label for="" class="password-generator__generator-title">Character Length <span class="password-generator__password-length">0</span></label>
+          <input type="range" name="password-generator__range-input" value="0" min="0" max="20" id="password-generator__range-input" class="password-generator__generator-length-input" />
+        </div>
+        <div class="password-generator__generator-group">
+          <div class="password-generator__generator-subgroup">
+            <input class="password-generator__checkbox" type="checkbox" name="" id="">
+            <label class="password-generator__checkbox-label" for="">Include Uppercase Letters</label>
+          </div>
+          <div class="password-generator__generator-subgroup">
+            <input class="password-generator__checkbox" type="checkbox" name="" id="">
+            <label class="password-generator__checkbox-label" for="">Include Lowercase Letters</label>
+          </div>
+          <div class="password-generator__generator-subgroup">
+            <input class="password-generator__checkbox" type="checkbox" name="" id="">
+            <label class="password-generator__checkbox-label" for="">Include Numbers</label>
+          </div>
+          <div class="password-generator__generator-subgroup">
+            <input class="password-generator__checkbox" type="checkbox" name="" id="">
+            <label class="password-generator__checkbox-label" for="">Include Symbols</label>
+          </div>
+        </div>
+        <div class="password-generator__strength-container">
+          <h6 class="password-generator__strength-title">Strength</h6>
+          <div class="password-generator__strength-indicator-container">
+            <h6 class="password-generator__strength-indicator-title"></h6>
+            <div class="password-generator__strength-indicator-group">
+              <div class="password-generator__strength-indicator"></div>
+              <div class="password-generator__strength-indicator"></div>
+              <div class="password-generator__strength-indicator"></div>
+              <div class="password-generator__strength-indicator"></div>
+            </div>
+          </div>
+        </div>
+        <button>Generate <img src="./assets/images/icon-arrow-right.svg" alt="arrow right icon"></button>
+      </section>
+    </article>
+  </main>
+  <script src="./assets/script.js/rangeInput.js"></script>
+</body>
+</html>
