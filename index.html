@@ -4,64 +4,74 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
-
+  
   <title>Password generator app | Frontend Mentor</title>
   <link rel="stylesheet" href="./assets/styles/styles.css">
 </head>
 <body>
   <main>
     <article class="password-generator">
-      <h6 class="password-generator__title">
-        Password Generator
-      </h6>
-      <section class="password-generator__display">
-        <p class="password-generator__generated-password">P4$5W0rD!</p>
-        <button class="password-generator__copy-btn">
-          <img src="./assets/images/icon-copy.svg" width="17.5" height="20" alt="copy icon">
-        </button>
+      <h6 class="password-generator__title">Password Generator</h6>
+      <section class="password-generator__password-field">
+        <span class="password-generator__password-output">P4$5W0rD!</span>
+        <div class="password-generator__copy-wrapper">
+          <span class="password-generator__copy-text">COPIED</span>
+          <button class="password-generator__copy-btn">
+            <img class="password-generator__copy-icon" width="17.5" height="20" src="./assets/images/icon-copy.svg" alt="copy icon">
+          </button>
+        </div>
       </section>
-      <section class="password-generator__generator-container">
-        <div class="password-generator__generator-group">
-          <label for="" class="password-generator__generator-title">Character Length <span class="password-generator__password-length">0</span></label>
-          <input type="range" name="password-generator__range-input" value="0" min="0" max="20" id="password-generator__range-input" class="password-generator__generator-length-input" />
+      <form class="password-generator__password-settings">
+        <div class="password-generator__settings-group">
+          <div class="password-generator__char-length">
+            <h6 class="password-generator__char-length-title">
+              Character Length
+            </h6>
+            <span class="password-generator__char-count">0</span>
+          </div>
+          <input
+            class="password-generator__char-length-slider"
+            id="password-generator__char-length-slider"
+            type="range"
+            value="0"
+            min="0"
+            max="20"
+            />
         </div>
-        <div class="password-generator__generator-group">
-          <div class="password-generator__generator-subgroup">
-            <input class="password-generator__checkbox" type="checkbox" name="" id="">
-            <label class="password-generator__checkbox-label" for="">Include Uppercase Letters</label>
+        <div class="password-generator__settings-group password-generator__settings-group--char-include">
+          <div class="password-generator__settings-subgroup">
+            <input type="checkbox" name="" id="" class="password-generator__checkbox">
+            <label class="password-generator__label">Include Uppercase Letters</label>
           </div>
-          <div class="password-generator__generator-subgroup">
-            <input class="password-generator__checkbox" type="checkbox" name="" id="">
-            <label class="password-generator__checkbox-label" for="">Include Lowercase Letters</label>
+          <div class="password-generator__settings-subgroup">
+            <input type="checkbox" name="" id="" class="password-generator__checkbox">
+            <label class="password-generator__label">Include Lowercase Letters</label>
           </div>
-          <div class="password-generator__generator-subgroup">
-            <input class="password-generator__checkbox" type="checkbox" name="" id="">
-            <label class="password-generator__checkbox-label" for="">Include Numbers</label>
+          <div class="password-generator__settings-subgroup">
+            <input type="checkbox" name="" id="" class="password-generator__checkbox">
+            <label class="password-generator__label">Include Numbers</label>
           </div>
-          <div class="password-generator__generator-subgroup">
-            <input class="password-generator__checkbox" type="checkbox" name="" id="">
-            <label class="password-generator__checkbox-label" for="">Include Symbols</label>
+          <div class="password-generator__settings-subgroup">
+            <input type="checkbox" name="" id="" class="password-generator__checkbox">
+            <label class="password-generator__label">Include Symbols</label>
           </div>
         </div>
-        <div class="password-generator__strength-container">
-          <h6 class="password-generator__strength-title">Strength</h6>
-          <div class="password-generator__strength-indicator-container">
-            <h6 class="password-generator__strength-indicator-title"></h6>
-            <div class="password-generator__strength-indicator-group">
-              <div class="password-generator__strength-indicator"></div>
-              <div class="password-generator__strength-indicator"></div>
-              <div class="password-generator__strength-indicator"></div>
-              <div class="password-generator__strength-indicator"></div>
+        <div class="password-generator__settings-group password-generator__settings-group--strength">
+          <span class="password-generator__strength-label">STRENGTH</span>
+          <div class="password-generator__strength-rating">
+            <span class="password-generator__rating-text">Strong</span>
+            <div class="password-generator__rating-bars">
+              <div class="password-generator__rating-bar"></div>
+              <div class="password-generator__rating-bar"></div>
+              <div class="password-generator__rating-bar"></div>
+              <div class="password-generator__rating-bar"></div>
             </div>
           </div>
         </div>
-        <button>Generate <img src="./assets/images/icon-arrow-right.svg" alt="arrow right icon"></button>
-      </section>
+        <button class="password-generator__generate-btn" type="submit">GENERATE <svg class="password-generator__arrow-right-icon" width="11.11" height="12" xmlns="http://www.w3.org/2000/svg"><path fill="#24232C" d="m5.106 12 6-6-6-6-1.265 1.265 3.841 3.84H.001v1.79h7.681l-3.841 3.84z"/></svg>
+      </form>
     </article>
   </main>
-  <script src="./assets/script.js/rangeInput.js"></script>
+  <script src="./assets/script/rangeInput.js"></script>
 </body>
 </html>

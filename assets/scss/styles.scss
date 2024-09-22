@@ -1,3 +1,21 @@
+/* font
+ ******************************/
+// @font-face {
+//     font-family: 'JetBrains Mono';
+//     src: url(../fonts/JetBrainsMono-VariableFont_wght.ttf);
+//     // src: url(../fonts/static/JetBrainsMono-Bold.ttf);
+// }
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url(../fonts/static/JetBrainsMono-Bold.ttf);
+    // src: url(../fonts/static/JetBrainsMono-Bold.ttf);
+}
+
+/* Colors
+ ******************************/
+/* Primary
+ ***************/
 $very-dark-grey: #18171F;
 $dark-grey: #24232C;
 $grey: #817D92;
@@ -7,61 +25,86 @@ $yellow: #F8CD65;
 $orange: #FB7C58;
 $red: #F64A4A;
 
+@mixin headingTextL() {
+    /* Heading (L) */
+    font-size: 32px;
+    line-height: 42px;
+}
+
+@mixin headingTextM() {
+    /* Heading (M) */
+    font-size: 24px;
+    line-height: 31px;
+}
+
+@mixin bodyTextM() {
+    /* Body (M) */
+    font-size: 18px;
+    line-height: 23px;
+}
+
+@mixin bodyTextS() {
+    // Body (S)
+    font-size: 16px;
+    line-height: 21px;
+}
+
+/* Global variables
+ ******************************/
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+    font-family: 'JetBrains Mono';
 }
 
 html,
 body {
-    background-color: #08070B;
+    background-color: $very-dark-grey;
 }
 
+/* Body variables
+ ******************************/
 main {
     display: flex;
-    align-items: center;
     justify-content: center;
 }
 
 .password-generator {
     margin: 64px 16px 63px;
+    max-width: 343px;
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 16px;
 
     &__title {
-        font-family: 'JetBrains Mono';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 21px;
-        text-align: center;
-
+        @include bodyTextS();
         color: $grey;
+        text-align: center;
     }
 
-    &__display {
-        padding: 17px 15.5px 15px 16px;
+    &__password-field {
+        padding: 17px 15.5px 16px 16px;
         display: flex;
         align-items: center;
         justify-content: space-between;
 
         background: $dark-grey;
-
     }
 
-    &__generated-password {
-        font-family: 'JetBrains Mono';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 32px;
-        line-height: 42px;
+    &__password-output {
+        @include headingTextM();
 
         color: $almost-white;
+        opacity: .25;
+    }
 
-        opacity: 0.25;
+    &__copy-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 16px;
     }
 
     &__copy-btn {
@@ -69,108 +112,288 @@ main {
         border: none;
     }
 
-    &__generator-container {
+    &__copy-text {
+        @include bodyTextS();
+        color: $neon-green;
+        display: none;
+    }
+
+    &__password-settings {
         padding: 16px;
-        background: $dark-grey;
+        background-color: $dark-grey;
 
         display: flex;
         flex-direction: column;
-        gap: 32px;
     }
 
-    &__generator-title {
+    &__char-length {
+        margin-bottom: 8px;
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        justify-content: space-between;
+    }
 
-        font-family: 'JetBrains Mono';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 21px;
-
+    &__char-length-title {
+        @include bodyTextS();
         color: $almost-white;
     }
 
-    &__password-length {
-        font-family: 'JetBrains Mono';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 24px;
-        line-height: 32px;
-
+    &__char-count {
+        @include headingTextM();
         color: $neon-green;
     }
 
-    &__generator-length-input {
-        margin-top: 8px;
-        appearance: none;
+    &__char-length-slider {
+        margin: 10px 0;
         width: 100%;
         height: 8px;
         background: linear-gradient(90deg, $neon-green 0%, $very-dark-grey 0%);
-        cursor: pointer;
-    }
-    
-    /* Thumb: for Chrome, Safari, Edge */
-    &__generator-length-input::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 28px;
-      height: 28px;
-      border-radius: 28px;
-      background: $almost-white;
-      box-shadow: none;
-    }
-    
-    /* Thumb: for Firefox */
-    &__generator-length-input::-moz-range-thumb {
-      border: none;
-      width: 28px;
-      height: 28px;
-      border-radius: 28px;
-      background: $almost-white;
-      box-shadow: none;
+
+        appearance: none;
+
+        /* Thumb: for Chrome, Safari, Edge */
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 28px;
+            background: $almost-white;
+            box-shadow: none;
+        }
+
+        /* Thumb: for Firefox */
+        &::-moz-range-thumb {
+            width: 28px;
+            height: 28px;
+            border-radius: 28px;
+            border: none;
+
+            background: $almost-white;
+            box-shadow: none;
+        }
     }
 
-    &__generator-subgroup {
+    &__settings-group {
+        &--char-include {
+            margin: 32px 0;
+        }
+    }
+
+    &__settings-subgroup {
         display: flex;
         align-items: center;
         gap: 20px;
     }
 
-    &__generator-subgroup:not(:last-of-type) {
+    &__settings-subgroup:not(:last-of-type) {
         margin-bottom: 16px;
     }
 
     &__checkbox {
-        padding: 5px 4.61px 6px 4px;
-        appearance: none;
-        position: relative;
+        padding-top: 6px;
+        border: 2px solid $almost-white;
         width: 20px;
         height: 20px;
-        border: 2px solid #e6e5ea;
-        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        position: relative;
+        appearance: none;
     }
-    
+
     &__checkbox:checked {
         border: none;
-        background-color: #a4ffaf;
+        background-color: $neon-green;
     }
-    
+
     &__checkbox:checked::after {
         content: url(../images/icon-check.svg);
     }
 
-    &__checkbox-label {
-        font-family: 'JetBrains Mono';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 21px;
-  
-        /* Almost White */
+    &__label {
+        @include bodyTextS();
         color: $almost-white;
-      }
-        
+    }
+
+    &__settings-group {
+        &--strength {
+            padding: 14px 16px;
+
+            background-color: $very-dark-grey;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    &__strength-label {
+        @include bodyTextS();
+        color: $grey;
+        text-align: center;
+    }
+
+    &__strength-rating {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    &__rating-text {
+        @include bodyTextM();
+        color: $almost-white;
+        text-transform: uppercase;
+        text-align: right;
+
+        display: none;
+    }
+
+    &__rating-bars {
+        display: flex;
+        gap: 8px;
+    }
+
+    &__rating-bar {
+        width: 10px;
+        height: 28px;
+        border: 2px solid $almost-white;
+    }
+
+    &__generate-btn {
+        margin-top: 16px;
+        height: 56px;
+        background: $neon-green;
+        border: none;
+
+        @include bodyTextS();
+        color: $dark-grey;
+    }
 }
 
+@media (hover: hover) and (pointer: fine) {
+    .password-generator {
+        &__copy-btn {
+            &:hover {
+                cursor: pointer;
+
+                .password-generator__copy-icon {
+                    filter: contrast(3.5);
+                }
+            }
+        }
+
+        &__char-length-slider {
+            &::-webkit-slider-thumb {
+                cursor: pointer;
+
+                &:hover {
+                    border: 2px solid $neon-green;
+                    background-color: $very-dark-grey;
+                }
+            }
+        }
+
+        &__checkbox {
+            cursor: pointer;
+
+            &:not(:checked):hover {
+                border: 2px solid #A4FFAF;
+            }
+        }
+
+        &__generate-btn {
+            cursor: pointer;
+
+            &:hover {
+                border: 2px solid $neon-green;
+                background-color: $dark-grey;
+
+                color: $neon-green;
+
+                svg {
+                    path {
+                        fill: $neon-green;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 540px) {
+    .password-generator {
+        max-width: 540px;
+        gap: 0;
+
+        &__title {
+            margin-bottom: 31px;
+            font-size: 24px;
+            line-height: 32px;
+        }
+
+        &__password-field {
+            margin-bottom: 24px;
+            padding: 19px 32px;
+        }
+
+        &__password-output {
+            @include headingTextL();
+        }
+
+        &__copy-icon {
+            width: 21px;
+            height: 24px;
+        }
+
+        &__password-settings {
+            padding: 24px 32px 32px;
+        }
+
+        &__char-length {
+            margin-bottom: 16px;
+            padding-bottom: 1px;
+        }
+
+        &__char-length-title {
+            @include bodyTextM();
+        }
+
+        &__char-count {
+            @include headingTextL();
+        }
+
+        &__settings-subgroup:not(:last-of-type) {
+            margin-bottom: 20px;
+        }
+        
+        &__label {
+            @include bodyTextM();
+        }
+
+        &__settings-group--strength {
+            padding-top: 0;
+            padding-bottom: 0;
+            height: 72px;
+        }
+
+        &__strength-label {
+            @include bodyTextM();
+        }
+        
+        &__rating-text {
+            @include headingTextM();
+        }
+
+        &__generate-btn {
+            margin-top: 32px;
+            height: 65px;
+            @include bodyTextM();
+        }
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    
+}
