@@ -72,7 +72,7 @@ main {
 }
 
 .password-generator {
-    margin: 64px 16px 63px;
+    margin: 64px 0 63px;
     max-width: 343px;
     width: 100%;
     display: flex;
@@ -330,6 +330,7 @@ main {
 
 @media only screen and (min-width: 540px) {
     .password-generator {
+        margin: 133px 0 196px;
         max-width: 540px;
         gap: 0;
 
@@ -398,8 +399,4 @@ main {
             @include bodyTextM();
         }
     }
-}
-
-@media only screen and (min-width: 1440px) {
-    
 }

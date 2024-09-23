@@ -97,7 +97,6 @@ var StyleMeter = function StyleMeter(rating) {
 
 var calcStrength = function calcStrength(passwordLength, charPoolSize) {
   var strength = passwordLength * Math.log2(charPoolSize);
-  console.log(Math.log2(charPoolSize));
   strengthText.style.display = "inline";
 
   if (strength < 25) {
@@ -164,33 +163,30 @@ var copyPassword = function copyPassword() {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          console.log(!passwordOutPut.textContent);
-
           if (passwordOutPut.textContent) {
-            _context.next = 3;
+            _context.next = 2;
             break;
           }
 
           return _context.abrupt("return");
 
-        case 3:
+        case 2:
           if (canCopy) {
-            _context.next = 5;
+            _context.next = 4;
             break;
           }
 
           return _context.abrupt("return");
 
-        case 5:
+        case 4:
           passwordCopyText.style.opacity = 1;
           setInterval(function () {
             passwordCopyText.style.opacity = 0;
           }, 1000);
-          passwordOutPut.select();
-          _context.next = 10;
+          _context.next = 8;
           return regeneratorRuntime.awrap(navigator.clipboard.writeText(passwordOutPut.textContent));
 
-        case 10:
+        case 8:
         case "end":
           return _context.stop();
       }

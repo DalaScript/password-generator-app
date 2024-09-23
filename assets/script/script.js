@@ -89,7 +89,6 @@ const StyleMeter = (rating) => {
 
 const calcStrength = (passwordLength, charPoolSize) => {
   const strength = passwordLength * Math.log2(charPoolSize);
-  console.log(Math.log2(charPoolSize))
   strengthText.style.display = "inline";
 
   if (strength < 25) {
@@ -152,7 +151,6 @@ const validInput = () => {
 };
 
 const copyPassword = async () => {
-  console.log(!passwordOutPut.textContent);
   if (!passwordOutPut.textContent) return;
 
   if (!canCopy) return;
@@ -163,7 +161,6 @@ const copyPassword = async () => {
     passwordCopyText.style.opacity = 0;
   }, 1000);
   
-  passwordOutPut.select();
   await navigator.clipboard.writeText(passwordOutPut.textContent);
 }
 
