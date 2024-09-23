@@ -99,6 +99,10 @@ main {
 
         color: $almost-white;
         opacity: .25;
+
+        &--active {
+            opacity: 1;
+        }
     }
 
     &__copy-wrapper {
@@ -115,7 +119,9 @@ main {
     &__copy-text {
         @include bodyTextS();
         color: $neon-green;
-        display: none;
+        opacity: 0;
+
+        transition: opacity .5s ease;
     }
 
     &__password-settings {

@@ -8,44 +8,43 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var inputRange = document.getElementById("password-generator__char-length-slider");
-var activeColor = "#A4FFAF";
-var inactiveColor = "#18171F";
-inputRange.addEventListener("input", function () {
-  var ratio = (this.value - this.min) / (this.max - this.min) * 100;
-  this.style.background = "linear-gradient(90deg, ".concat(activeColor, " ").concat(ratio, "%, ").concat(inactiveColor, " ").concat(ratio, "%)");
-});
-var passwordDisplay = document.querySelector(".password-generator__password-output");
+var neonGreen = "#A4FFAF";
+var veryDarkGrey = "#18171F";
+var red = "#F64A4A";
+var orange = "#FB7C58";
+var yellow = "#F8CD65";
+var passwordOutPut = document.querySelector(".password-generator__password-output");
 var passwordCopyText = document.querySelector(".password-generator__copy-text");
 var passwordCopyBtn = document.querySelector(".password-generator__copy-btn");
-var passwordForm = document.querySelector(".password-generator__password-settings");
-var CharCount = document.querySelector(".password-generator__char-count");
-var lengthSlider = document.querySelector(".password-generator__char-length-slider");
+var passwordSettings = document.querySelector(".password-generator__password-settings");
+var charCount = document.querySelector(".password-generator__char-count");
+var charLengthSlider = document.querySelector(".password-generator__char-length-slider");
 var checkBoxes = document.querySelectorAll(".password-generator__checkbox");
-var strengthDesc = document.querySelector(".password-generator__rating-text");
+var strengthText = document.querySelector(".password-generator__rating-text");
 var strengthBars = document.querySelectorAll(".password-generator__rating-bar");
-var Character_sets = {
+var characterSets = {
   uppercase: ["ABCDEFGHIJKLMNOPQRSTUVWXYZ", 26],
   lowercase: ["abcdefghijklmnopqrstuvwxyz", 26],
-  number: ["0123456789", 10],
+  numbers: ["0123456789", 10],
   symbols: ["!@#$%^&*()", 10]
 };
 var canCopy = false;
 
 var getSliderVal = function getSliderVal() {
-  CharCount.textContent = lengthSlider.value;
+  charCount.textContent = charLengthSlider.value;
 };
 
-var styleRangSlider = function styleRangSlider() {
-  var min = lengthSlider.min;
-  var max = lengthSlider.max;
-  var val = lengthSlider.value;
-  lengthSlider.style.backgroundSize = (val - min) * 100 / (max - min) + "% 100%";
+var styleRangeSlider = function styleRangeSlider() {
+  var min = charLengthSlider.min;
+  var max = charLengthSlider.max;
+  var val = charLengthSlider.value;
+  var ratio = (val - min) / (max - min) * 100;
+  charLengthSlider.style.background = "linear-gradient(90deg, ".concat(neonGreen, " ").concat(ratio, "%, ").concat(veryDarkGrey, " ").concat(ratio, "%)");
 };
 
 var handlSliderInput = function handlSliderInput() {
   getSliderVal();
-  styleRangSlider();
+  styleRangeSlider();
 }; //
 //  Reset Bar Styles
 //
@@ -73,20 +72,20 @@ var StyleMeter = function StyleMeter(rating) {
   var numBars = rating[1];
   var barToFill = Array.from(strengthBars).slice(0, numBars);
   resetBarStyles();
-  strengthDesc.textContent = text;
+  strengthText.textContent = text;
 
   switch (numBars) {
     case 1:
-      return Stylebars(barToFill, "hsl(0, 91%, 63%");
+      return Stylebars(barToFill, red);
 
     case 2:
-      return Stylebars(barToFill, "hsl(13, 95%, 66%");
+      return Stylebars(barToFill, orange);
 
     case 3:
-      return Stylebars(barToFill, "hsl(42, 91%, 68%");
+      return Stylebars(barToFill, yellow);
 
     case 4:
-      return Stylebars(barToFill, "hsl(127, 100%, 82%");
+      return Stylebars(barToFill, neonGreen);
 
     default:
       throw new Error("Invalid Value from Num Bars");
@@ -96,8 +95,10 @@ var StyleMeter = function StyleMeter(rating) {
 //
 
 
-var CalcStrength = function CalcStrength(passwordLength, charPoolSize) {
+var calcStrength = function calcStrength(passwordLength, charPoolSize) {
   var strength = passwordLength * Math.log2(charPoolSize);
+  console.log(Math.log2(charPoolSize));
+  strengthText.style.display = "inline";
 
   if (strength < 25) {
     return ["Too Week", 1];
@@ -111,34 +112,40 @@ var CalcStrength = function CalcStrength(passwordLength, charPoolSize) {
 };
 
 var generatePassword = function generatePassword(e) {
-  e.preventDefault();
-  validInput();
+  e.preventDefault(); // validInput();
+
   var generatePassword = "";
   var includeSets = [];
   var charPool = 0;
-  checkBoxes.forEach(function (box) {
-    if (box.checked) {
-      includeSets.push(Character_sets[box.value][0]);
-      charPool += Character_sets[box.value][1];
-      console.log(box.value[0]);
-      console.log(box.value[1]);
-    }
-  });
 
-  if (includeSets) {
-    for (var i = 0; i < lengthSlider.value; i++) {
-      var randSetIndex = Math.floor(Math.random() * includeSets.length);
-      var randSet = includeSets[randSetIndex];
-      var randCharIndex = Math.floor(Math.random() * randSet.length);
-      var randChar = randSet[randCharIndex];
-      generatePassword += randChar;
+  if (Array.from(checkBoxes).every(function (box) {
+    return box.checked === false;
+  }) || charLengthSlider.value == 0) {
+    alert("Make Sure to check at least one Check Box and select character length");
+  } else {
+    checkBoxes.forEach(function (box) {
+      if (box.checked) {
+        includeSets.push(characterSets[box.value][0]);
+        charPool += characterSets[box.value][1];
+      }
+    });
+
+    if (includeSets) {
+      for (var i = 0; i < charLengthSlider.value; i++) {
+        var randSetIndex = Math.floor(Math.random() * includeSets.length);
+        var randSet = includeSets[randSetIndex];
+        var randCharIndex = Math.floor(Math.random() * randSet.length);
+        var randChar = randSet[randCharIndex];
+        generatePassword += randChar;
+      }
     }
+
+    var strength = calcStrength(charLengthSlider.value, charPool);
+    StyleMeter(strength);
+    canCopy = true;
+    passwordOutPut.classList.add("password-generator__password-output--active");
+    passwordOutPut.textContent = generatePassword;
   }
-
-  var strength = CalcStrength(lengthSlider.value, charPool);
-  StyleMeter(strength);
-  canCopy = true;
-  passwordDisplay.textContent = generatePassword;
 }; // valid
 
 
@@ -147,6 +154,8 @@ var validInput = function validInput() {
     return box.checked === false;
   })) {
     alert("Make Sure to check at least one Check Box");
+  } else if (charLengthSlider.value == 0) {
+    alert("Make sure you select the character length");
   }
 };
 
@@ -155,38 +164,33 @@ var copyPassword = function copyPassword() {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          if (!(!passwordDisplay.textContent || passwordCopyText.textContent)) {
-            _context.next = 2;
+          console.log(!passwordOutPut.textContent);
+
+          if (passwordOutPut.textContent) {
+            _context.next = 3;
             break;
           }
 
           return _context.abrupt("return");
 
-        case 2:
+        case 3:
           if (canCopy) {
-            _context.next = 4;
+            _context.next = 5;
             break;
           }
 
           return _context.abrupt("return");
 
-        case 4:
-          setTimeout(function () {
-            passwordCopyText.style.transition = "all 1s";
+        case 5:
+          passwordCopyText.style.opacity = 1;
+          setInterval(function () {
             passwordCopyText.style.opacity = 0;
           }, 1000);
-          setInterval(function () {
-            passwordCopyText.style.removeProperty("opacity");
-            passwordCopyText.style.removeProperty("transition");
-            passwordCopyText.textContent = "";
-          }, 1000);
-          _context.next = 8;
-          return regeneratorRuntime.awrap(navigator.clipboard.writeText(passwordDisplay.text));
+          passwordOutPut.select();
+          _context.next = 10;
+          return regeneratorRuntime.awrap(navigator.clipboard.writeText(passwordOutPut.textContent));
 
-        case 8:
-          passwordCopyText.textContent = "Copied";
-
-        case 9:
+        case 10:
         case "end":
           return _context.stop();
       }
@@ -194,7 +198,6 @@ var copyPassword = function copyPassword() {
   });
 };
 
-CharCount.textContent = lengthSlider.value;
-lengthSlider.addEventListener("input", handlSliderInput);
-passwordForm.addEventListener("submit", generatePassword);
+charLengthSlider.addEventListener("input", handlSliderInput);
+passwordSettings.addEventListener("submit", generatePassword);
 passwordCopyBtn.addEventListener("click", copyPassword);

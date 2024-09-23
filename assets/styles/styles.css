@@ -57,6 +57,9 @@ main {
   color: #E6E5EA;
   opacity: 0.25;
 }
+.password-generator__password-output--active {
+  opacity: 1;
+}
 .password-generator__copy-wrapper {
   display: flex;
   align-items: center;
@@ -70,7 +73,8 @@ main {
   font-size: 16px;
   line-height: 21px;
   color: #A4FFAF;
-  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 .password-generator__password-settings {
   padding: 16px;
